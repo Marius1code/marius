@@ -159,14 +159,14 @@ $categories = $pdo->query("SELECT DISTINCT categorie FROM produits")->fetchAll(P
                     <!-- Image illustrative (optionnelle) -->
                     <img src="images/img1.png"
                         alt="Produits high-tech : PC, disques durs, accessoires"
-                        class="img-fluid rounded-3 shadow-lg"
+                        class="img-fluid rounded-3 shadow-lg p-0"
                         style="max-width: 100%; border: 5px solid rgba(255, 255, 255, 0.2);">
                 </div>
             </div>
         </div>
     </section>
 
-
+<!-- <br><br><br> -->
     <!-- SEARCH BAR -->
     <div class="container">
         <div class="search-bar">

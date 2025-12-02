@@ -130,7 +130,8 @@
     background: linear-gradient(135deg, rgba(20, 80, 140, 0.85), rgba(44, 62, 80, 0.85)), url('images/img.png') no-repeat center center;
     background-size: cover;
     color: white;
-    padding: 6rem 0;
+    padding: 5rem 0;
+    margin-bottom: 70px;
     position: relative;
     overflow: hidden;
 }
@@ -213,7 +214,7 @@
 .search-bar {
     background-color: white;
     border-radius: var(--border-radius);
-    padding: 2rem;
+    padding: 0.5rem;
     margin: -3rem auto 2rem;
     box-shadow: var(--shadow-md);
     max-width: 80%;
@@ -222,7 +223,7 @@
 .search-bar .form-control,
 .search-bar .form-select {
     border-radius: 8px;
-    padding: 0.75rem;
+    padding: 0.5rem;
     border: 1px solid #e0e0e0;
 }
 
@@ -230,7 +231,7 @@
     background-color: var(--primary-color);
     border-color: var(--primary-color);
     border-radius: 8px;
-    padding: 0.75rem;
+    padding: 0.55rem;
 }
 
 /* -------------------------- */
@@ -541,9 +542,10 @@
 /* ⭐ TOASTS DE NOTIFICATION */
 .toast-container {
     position: fixed;
-    top: 1rem;
+    /* top: 5rem; */
+    margin-top: 50px;
     right: 1rem;
-    z-index: 1055;
+    /* z-index: 1055; */
 }
 
 .toast {
