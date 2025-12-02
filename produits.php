@@ -71,6 +71,7 @@ $message = $_GET['msg'] ?? '';
 
 $userDisplay = htmlspecialchars(trim($_SESSION['user_nom'] ?? '') . ' ' . trim($_SESSION['user_prenom'] ?? ''), ENT_QUOTES, 'UTF-8');
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -88,32 +89,28 @@ $userDisplay = htmlspecialchars(trim($_SESSION['user_nom'] ?? '') . ' ' . trim($
 </style>
 </head>
 <body class="frosty-bg">
+
 <div class="flex h-screen">
+
     <!-- Sidebar -->
-    <div class="sidebar w-64 shadow-lg flex flex-col">
+    <div id="sidebar" class="sidebar w-64 shadow-lg flex flex-col fixed top-0 left-0 h-full transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-50">
         <div class="p-4 text-center border-b border-blue-200">
             <h1 class="text-2xl font-bold text-blue-800 flex items-center justify-center">
                 <i data-feather="wind" class="mr-2"></i> NexaStore
             </h1>
         </div>
-        <div class="p-4 flex-1">
+        <div class="p-4 flex-1 overflow-auto">
            <nav>
                 <ul class="space-y-1">
-                    <li>
-                        <a href="dash.php" class="flex items-center px-4 py-2 text-blue-900 bg-blue-100 rounded-lg">
-                            <i data-feather="home" class="mr-2"></i> Tableau de bord
-                        </a>
-                    </li>
-                   
-                        <li><a href="employes.php" class="flex items-center px-4 py-2 text-blue-800 hover:bg-blue-50 rounded-lg"><i data-feather="users" class="mr-2"></i> Employés</a></li>
-                        <li><a href="clients.php" class="flex items-center px-4 py-2 text-blue-800 hover:bg-blue-50 rounded-lg"><i data-feather="user-check" class="mr-2"></i> Clients</a></li>
-                        <li><a href="produits.php" class="flex items-center px-4 py-2 text-blue-800 hover:bg-blue-50 rounded-lg"><i data-feather="package" class="mr-2"></i> Produits</a></li>
-                        <li><a href="categories.php" class="flex items-center px-4 py-2 text-blue-800 hover:bg-blue-50 rounded-lg"><i data-feather="grid" class="mr-2"></i> Catégories</a></li>
-                        <li><a href="ventes.php" class="flex items-center px-4 py-2 text-blue-800 hover:bg-blue-50 rounded-lg"><i data-feather="shopping-cart" class="mr-2"></i> Ventes</a></li>
-                        <li><a href="factures.php" class="flex items-center px-4 py-2 text-blue-800 hover:bg-blue-50 rounded-lg"><i data-feather="file-text" class="mr-2"></i> Factures</a></li>
-                        <li><a href="alertes.php" class="flex items-center px-4 py-2 text-blue-800 hover:bg-blue-50 rounded-lg"><i data-feather="bell" class="mr-2"></i> Alertes</a></li>
-                        <li><a href="statistiques.php" class="flex items-center px-4 py-2 text-blue-800 hover:bg-blue-50 rounded-lg"><i data-feather="bar-chart-2" class="mr-2"></i> Statistiques</a></li>
-                   
+                    <li><a href="dash.php" class="flex items-center px-4 py-2 text-blue-900 hover:bg-blue-100 rounded-lg"><i data-feather="home" class="mr-2"></i> Dashboard</a></li>
+                    <li><a href="employes.php" class="flex items-center px-4 py-2 text-blue-800 hover:bg-blue-50 rounded-lg"><i data-feather="users" class="mr-2"></i> Employés</a></li>
+                    <li><a href="clients.php" class="flex items-center px-4 py-2 text-blue-800 hover:bg-blue-50 rounded-lg"><i data-feather="user-check" class="mr-2"></i> Clients</a></li>
+                    <li><a href="produits.php" class="flex items-center px-4 py-2 text-blue-800 bg-blue-100 rounded-lg"><i data-feather="package" class="mr-2"></i> Produits</a></li>
+                    <li><a href="categories.php" class="flex items-center px-4 py-2 text-blue-800 hover:bg-blue-50 rounded-lg"><i data-feather="grid" class="mr-2"></i> Catégories</a></li>
+                    <li><a href="ventes.php" class="flex items-center px-4 py-2 text-blue-800 hover:bg-blue-50 rounded-lg"><i data-feather="shopping-cart" class="mr-2"></i> Ventes</a></li>
+                    <li><a href="factures.php" class="flex items-center px-4 py-2 text-blue-800 hover:bg-blue-50 rounded-lg"><i data-feather="file-text" class="mr-2"></i> Factures</a></li>
+                    <li><a href="alertes.php" class="flex items-center px-4 py-2 text-blue-800 hover:bg-blue-50 rounded-lg"><i data-feather="bell" class="mr-2"></i> Alertes</a></li>
+                    <li><a href="statistiques.php" class="flex items-center px-4 py-2 text-blue-800 hover:bg-blue-50 rounded-lg"><i data-feather="bar-chart-2" class="mr-2"></i> Statistiques</a></li>
                     <li><a href="deconnexion.php" class="flex items-center px-4 py-2 text-red-700 hover:bg-red-50 rounded-lg"><i data-feather="log-out" class="mr-2"></i> Déconnexion</a></li>
                 </ul>
             </nav>
@@ -121,21 +118,26 @@ $userDisplay = htmlspecialchars(trim($_SESSION['user_nom'] ?? '') . ' ' . trim($
     </div>
 
     <!-- Main Content -->
-    <div class="flex-1 overflow-auto">
+    <div class="flex-1 overflow-auto md:ml-64">
         <header class="bg-white shadow-sm p-4 flex justify-between items-center">
-            <h2 class="text-xl font-semibold text-blue-800"><i data-feather="package" class="inline mr-2"></i> Produits</h2>
+            <div class="flex items-center space-x-2">
+                <!-- Burger menu mobile -->
+                <button id="burgerBtn" class="md:hidden p-2 rounded bg-blue-500 text-white"><i data-feather="menu"></i></button>
+                <h2 class="text-xl font-semibold text-blue-800"><i data-feather="package" class="inline mr-2"></i> Produits</h2>
+            </div>
             <div class="flex items-center space-x-4">
                 <b><?= $userDisplay ?></b>
             </div>
         </header>
 
         <main class="p-6">
-           
+            <?php if($message): ?>
+                <div class="mb-4 p-2 bg-green-100 text-green-800 rounded"><?= htmlspecialchars($message) ?></div>
+            <?php endif; ?>
             <div class="bg-white shadow rounded p-4 overflow-auto">
-
-            <div class="flex justify-end mb-4">
-                <button onclick="openModal()" class="bg-blue-600 text-white px-4 py-2 rounded">Ajouter Produit</button>
-            </div>
+                <div class="flex justify-end mb-4">
+                    <button onclick="openModal()" class="bg-blue-600 text-white px-4 py-2 rounded">Ajouter Produit</button>
+                </div>
 
                 <table class="min-w-full border border-gray-200">
                     <thead class="bg-blue-50">
@@ -219,6 +221,14 @@ $userDisplay = htmlspecialchars(trim($_SESSION['user_nom'] ?? '') . ' ' . trim($
 
 <script>
 feather.replace();
+
+// Burger menu toggle mobile
+const burgerBtn = document.getElementById('burgerBtn');
+const sidebar = document.getElementById('sidebar');
+burgerBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('-translate-x-full');
+});
+
 function openModal(data=null){
     document.getElementById('modal').classList.remove('hidden');
     if(data){
@@ -238,5 +248,6 @@ function closeModal(){
     document.getElementById('modal').classList.add('hidden');
 }
 </script>
+
 </body>
 </html>
